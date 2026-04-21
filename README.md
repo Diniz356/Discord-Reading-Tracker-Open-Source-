@@ -1,4 +1,4 @@
-# Discord Reading Tracker (Open Source)
+# Discord Reading Bot Script (Open Source)
 
 Um script em Python modular e de fácil integração para gamificação de leitura em servidores do Discord. Este projeto foi desenvolvido para ser uma base sólida e simples para quem deseja implementar sistemas de XP baseados em progresso de leitura.
 
