@@ -1,6 +1,13 @@
 import sqlite3
+"""Funções de gereciamento de rank e buscas de dados da tabela niveis"""
 
 def xp_up(id,pglidas):
+    """
+        função responsável por atualizar a quantidade de XP
+    :param id: id do usuário
+    :param pglidas: total de páginas lidas
+    :return: fim da função
+    """
     novo_xp = pglidas * 10
     db = sqlite3.connect("Biblioteca.db")
     cursor = db.cursor()
@@ -18,6 +25,8 @@ def xp_up(id,pglidas):
     return
 
 def rankup(id):
+    """função responsável por atualizar e verificar o rank do usuário"""
+
     db = sqlite3.connect("Biblioteca.db")
     cursor = db.cursor()
     buscar = 'SELECT totalxp, nivel FROM niveis WHERE user_id = ?'
@@ -36,6 +45,8 @@ def rankup(id):
     return False
 
 def user_rank(id):
+    """função responsável por buscar o nível do usuário"""
+
     db = sqlite3.connect("Biblioteca.db")
     buscar = 'SELECT nivel FROM niveis WHERE user_id = ?'
     cursor = db.cursor()
@@ -45,6 +56,8 @@ def user_rank(id):
     return rank
 
 def user_xp(id):
+    """função responsável por buscar o xp do usuário"""
+
     db = sqlite3.connect("Biblioteca.db")
     buscar = 'SELECT totalxp FROM niveis WHERE user_id = ?'
     cursor = db.cursor()
