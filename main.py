@@ -101,21 +101,22 @@ async def ler(ctx,lido: int, *,titulo: str):
 @bot.command()
 async def estante(ctx):
     user_id = ctx.author.id
-    cursor.execute("SELECT titulo,paginas_lidas,paginas_totais FROM livros WHERE user_id = ?",(user_id,))
-    file = profile.user_bg(user_id)
+    cursor.execute("SELECT titulo,paginas_lidas,paginas_totais FROM livros WHERE user_id = ?", (user_id,))
     livros = cursor.fetchall()
-    msg_emb = discord.Embed()
-    msg_emb.title = f" 📚 Estante Virtual de  {ctx.author.display_name}"
-    msg_emb.description = "**• 📦 Acompanhe seu progresso na biblioteca real!**"
-    msg_emb.colour = 0x000000
-    msg_emb.set_thumbnail(url=ctx.author.display_avatar.url)
-    msg_emb.set_image(url=file)
     if not livros:
         return await ctx.send("❗**Sua estante está vazia! Tente registrar um livro primeiro..**")
     else:
+        file = profile.user_bg(user_id)
+        msg_emb = discord.Embed()
+        msg_emb.title = f" 📚 Estante Virtual de  {ctx.author.display_name}"
+        msg_emb.description = "**• 📦 Acompanhe seu progresso na biblioteca real!**"
+        msg_emb.colour = 0x000000
+        msg_emb.set_thumbnail(url=ctx.author.display_avatar.url)
+        msg_emb.set_image(url=file)
         for c in range(len(livros)):
-            msg_emb.add_field(name=str(f'📍 ❝ {livros[c][0]} ❞').replace("'",'').title(),inline=False,value=f'➤ *Páginas Totais:* {str(livros[c][2])}\n ➤ *Paginas Lidas:* {str(livros[c][1])}')
-    return await ctx.send(embed=msg_emb)
+            msg_emb.add_field(name=str(f'📍 ❝ {livros[c][0]} ❞').replace("'", '').title(), inline=False,
+                              value=f'➤ *Páginas Totais:* {str(livros[c][2])}\n ➤ *Paginas Lidas:* {str(livros[c][1])}')
+        return await ctx.send(embed=msg_emb)
 
 @bot.command()
 async def perfil(ctx):

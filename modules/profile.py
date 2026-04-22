@@ -62,7 +62,10 @@ def user_bg(id):
     cursor.execute(buscar,(id,))
     image_est = cursor.fetchone()
     db.commit()
-    return image_est[0]
+    if image_est is None:
+        return "https://img.freepik.com/vetores-premium/faixas-diagonais-de-fundo-listrado-preto_322958-2715.jpg?semt=ais_hybrid&w=740&q=80"
+    else:
+        return image_est[0]
 
 def user_pf(id):
     """     função de busca de imagem de fundo do comando perfil
@@ -77,4 +80,7 @@ def user_pf(id):
     cursor.execute(buscar,(id,))
     image_pf = cursor.fetchone()
     db.commit()
-    return image_pf[0]
+    if image_pf is None:
+        return "https://img.freepik.com/vetores-premium/faixas-diagonais-de-fundo-listrado-preto_322958-2715.jpg?semt=ais_hybrid&w=740&q=80"
+    else:
+        return image_pf[0]
