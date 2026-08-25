@@ -40,7 +40,7 @@ cursor.execute('''
 db.commit()
 
 @bot.command()
-async def registrar_livro(ctx,paginas_totais:int, *,titulo:str):
+async def registrar_livro(ctx,titulo:str, *,paginas_totais:int):
     user_id = ctx.author.id
     inserir = "INSERT INTO LIVROS (titulo,paginas_totais,user_id) VALUES (?,?,?)"
     cursor.execute(inserir, (titulo.lower().strip(),paginas_totais,user_id))
